@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+Chai page
+{% endblock %}
+
+{% block content %}
+<h1>All chai for you</h1>
+
+<style>
+    .chai-container {
+        display: flex; /* or display: grid; for grid layout */
+        flex-wrap: wrap; /* Allows images to wrap to next line if necessary */
+        gap: 20px; /* Optional: Adds space between items */
+      }
+    
+      .chai-item {
+        flex: 1 1 200px; /* Adjusts the width of each item, minimum width is 200px */
+        text-align: center; /* Aligns the text and image */
+      }
+    
+      .chai-item img {
+        width: 100%; /* Ensures image takes up the full width of the container */
+        height: auto; /* Maintains the aspect ratio */
+        max-width: 150px; /* Adjusts the maximum width of the image */
+        border-radius: 8px; /* Optional: Adds rounded corners to the image */
+      }
+</style>
+<div class="chai-container">
+{% for chai in chais  %}
+<div class="chai-item">
+    <img src="{{chai.image.url}}" alt="">
+    <h3>{{chai.name}}</h3>
+    <a href="{% url 'chai_detail' chai.id %}">
+        <button>
+            {{chai.type}} - {{chai.id}}
+        </button>
+    </a>
+
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}
+
